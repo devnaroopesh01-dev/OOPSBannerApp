@@ -1,60 +1,84 @@
 /**
  * OOPSBannerApp
- * UC6: Modular Banner using Helper Methods
+ * UC7: Object-Oriented Banner using CharacterPatternMap
  * @author Devna
- * @version 6.0
+ * @version 7.0
  */
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
 
-        String[] o = buildO();
-        String[] p = buildP();
-        String[] s = buildS();
+        // Create pattern map
+        Map<Character, CharacterPatternMap> patternLibrary = new HashMap<>();
 
-        // Combine characters row by row
-        for (int i = 0; i < o.length; i++) {
-            System.out.println(o[i] + "   " + o[i] + "   " + p[i] + "   " + s[i]);
+        patternLibrary.put('O', new CharacterPatternMap('O', new String[]{
+                " ***** ",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                " ***** "
+        }));
+
+        patternLibrary.put('P', new CharacterPatternMap('P', new String[]{
+                "****** ",
+                "*     *",
+                "*     *",
+                "****** ",
+                "*      ",
+                "*      ",
+                "*      "
+        }));
+
+        patternLibrary.put('S', new CharacterPatternMap('S', new String[]{
+                " ***** ",
+                "*      ",
+                "*      ",
+                " ***** ",
+                "      *",
+                "      *",
+                " ***** "
+        }));
+
+        String word = "OOPS";
+
+        // Render banner row by row
+        for (int row = 0; row < 7; row++) {
+            StringBuilder line = new StringBuilder();
+
+            for (char ch : word.toCharArray()) {
+                CharacterPatternMap pattern = patternLibrary.get(ch);
+                if (pattern != null) {
+                    line.append(pattern.getPattern()[row]).append("   ");
+                }
+            }
+
+            System.out.println(line);
         }
     }
 
-    // Helper method for letter O
-    public static String[] buildO() {
-        return new String[]{
-            " ***** ",
-            "*     *",
-            "*     *",
-            "*     *",
-            "*     *",
-            "*     *",
-            " ***** "
-        };
-    }
+    // Static Inner Class
+    static class CharacterPatternMap {
 
-    // Helper method for letter P
-    public static String[] buildP() {
-        return new String[]{
-            "****** ",
-            "*     *",
-            "*     *",
-            "****** ",
-            "*      ",
-            "*      ",
-            "*      "
-        };
-    }
+        private char character;
+        private String[] pattern;
 
-    // Helper method for letter S
-    public static String[] buildS() {
-        return new String[]{
-            " ***** ",
-            "*      ",
-            "*      ",
-            " ***** ",
-            "      *",
-            "      *",
-            " ***** "
-        };
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
     }
 }
