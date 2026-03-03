@@ -1,15 +1,16 @@
 /**
  * OOPSBannerApp
- * UC3: Render OOPS Banner using String.join()
+ * UC4: Render OOPS Banner using String Array and Loop
  * @author Devna
- * @version 3.0
+ * @version 4.0
  */
 
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
 
-        String banner = String.join("\n",
+        // Store banner lines in String array
+        String[] banner = {
             " *****   *****   ******   *****",
             "*     * *     *  *     * *",
             "*     * *     *  *     * *",
@@ -17,9 +18,11 @@ public class OOPSBannerApp {
             "*     * *     *  *             *",
             "*     * *     *  *             *",
             " *****   *****   *       *****"
-        );
+        };
 
-        System.out.println(banner);
-
+        // Loop through array and print each line
+        for (String line : banner) {
+            System.out.println(line);
+        }
     }
 }
